@@ -16,7 +16,7 @@ shinyUI(fluidPage(
                   choices = list("Beer" = "Beer", "Chicken" = "Chicken")),
       selectInput("conprice", label = h4("Consumption/Price"),
                   choices = list("Consumption" = "Consumption", "Price"="Price")),
-      selectInput("Duration", label = h4("Duration"),
+      selectInput("duration", label = h4("Duration"),
                   choices = list("Unknown" = "*", "16" = "16", "17" = "17", "18"="18"))
     ),
     

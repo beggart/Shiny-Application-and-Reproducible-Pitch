@@ -12,14 +12,13 @@ beer_data <- data.table::fread(input = "https://www.opengov-muenchen.de/dataset/
 shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     # Select diamonds depending of user input
-    beer <- filter(beer_data, grepl(input$conprice, ), grepl(input$col, color), grepl(input$clar, clarity))
+    #beer <- filter(beer_data, grepl(input$conprice, ), grepl(input$col, color), grepl(input$clar, clarity))
+    beer <- beer_data
     # build linear regression model
-    fit <- lm( price~carat, diam)
+    fit <- lm( jahr~bier_konsum, beer)
     # predicts the price
-    pred <- predict(fit, newdata = data.frame(carat = input$car,
-                                              cut = input$cut,
-                                              color = input$col,
-                                              clarity = input$clar))
+    pred <- predict(fit, beer$jahr)
+    
     # Draw the plot using ggplot2
     plot <- ggplot(data=diam, aes(x=carat, y = price))+
       geom_point(aes(color = cut), alpha = 0.3)+
