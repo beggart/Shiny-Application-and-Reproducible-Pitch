@@ -2,7 +2,9 @@
 title: "Shiny App and Repro Pitch"
 author: "Benjamin Eggart"
 date: "24 8 2021"
-output: ioslides_presentation
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +15,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 Oktoberfest Data Analysis Report enabled developing data products using shiny apps being embedded within RMarkDown.
 
-Using PageUp and PageDown keys all the slides can be traversed.
+Using PageLeft and PageRight keys all the slides can be traversed.
 
 ## Application Overview
 
