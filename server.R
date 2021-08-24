@@ -12,30 +12,32 @@ beer_data <- data.table::fread(input = "https://www.opengov-muenchen.de/dataset/
 shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     # Select diamonds depending of user input
-    #beer <- filter(beer_data, grepl(input$conprice, ), grepl(input$col, color), grepl(input$clar, clarity))
-    beer <- beer_data
+    #beer <- beer_data[,.(jahr, bier_konsum)]
+    beer <- beer_data[,.(jahr, input$type)]
+    beer <- as.data.frame.matrix(beer) 
     # build linear regression model
-    fit <- lm( jahr~bier_konsum, beer)
+    fit <- lm( input$type ~ jahr, beer)
     # predicts the price
-    pred <- predict(fit, beer$jahr)
+    pred <- predict(fit, newdata = data.frame(jahr=input$year))
     
     # Draw the plot using ggplot2
-    plot <- ggplot(data=diam, aes(x=carat, y = price))+
-      geom_point(aes(color = cut), alpha = 0.3)+
+    plot <- ggplot(data=beer_data, aes(jahr, !!as.symbol(input$type)))+
+      geom_point()+
+      #geom_point(aes(color = cut), alpha = 0.3)
       geom_smooth(method = "lm")+
-      geom_vline(xintercept = input$car, color = "red")+
+      geom_vline(xintercept = input$year, color = "red")+
       geom_hline(yintercept = pred, color = "green")
     plot
   })
   output$result <- renderText({
     # Renders the text for the prediction below the graph
-    diam <- filter(diamonds, grepl(input$cut, cut), grepl(input$col, color), grepl(input$clar, clarity))
-    fit <- lm( price~carat, diam)
-    pred <- predict(fit, newdata = data.frame(carat = input$car,
-                                              cut = input$cut,
-                                              color = input$col,
-                                              clarity = input$clar))
-    res <- paste(round(pred, digits = 1.5),"$" )
+    beer <- beer_data[,.(jahr, bier_konsum)]
+    beer <- as.data.frame.matrix(beer) 
+    # build linear regression model
+    fit <- lm( bier_konsum ~ jahr, beer)
+    # predicts the price
+    pred <- predict(fit, newdata = data.frame(jahr=input$year))
+    res <- paste(round(pred, digits = 1.5),"" )
     res
   })
   
