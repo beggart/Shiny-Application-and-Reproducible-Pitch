@@ -13,30 +13,32 @@ shinyServer(function(input, output) {
   output$distPlot <- renderPlot({
     # Select diamonds depending of user input
     #beer <- beer_data[,.(jahr, bier_konsum)]
-    beer <- beer_data[,.(jahr, input$type)]
-    beer <- as.data.frame.matrix(beer) 
+    #beer <- beer_data[,.(jahr, input$type)]
+    #beer <- as.data.frame.matrix(beer) 
     # build linear regression model
-    fit <- lm( input$type ~ jahr, beer)
+    fit <- lm( as.formula(paste(input$type, "~ jahr")), beer_data)
     # predicts the price
-    pred <- predict(fit, newdata = data.frame(jahr=input$year))
+    new.df <- data.frame(jahr=input$year)
+    pred <- predict(fit, new.df)
     
     # Draw the plot using ggplot2
     plot <- ggplot(data=beer_data, aes(jahr, !!as.symbol(input$type)))+
       geom_point()+
-      #geom_point(aes(color = cut), alpha = 0.3)
+      geom_line()+
       geom_smooth(method = "lm")+
-      geom_vline(xintercept = input$year, color = "red")+
+      geom_vline(xintercept = input$year, color = "green")+
       geom_hline(yintercept = pred, color = "green")
     plot
   })
   output$result <- renderText({
     # Renders the text for the prediction below the graph
-    beer <- beer_data[,.(jahr, bier_konsum)]
-    beer <- as.data.frame.matrix(beer) 
+    #beer <- beer_data[,.(jahr, bier_konsum)]
+    #beer <- as.data.frame.matrix(beer) 
     # build linear regression model
-    fit <- lm( bier_konsum ~ jahr, beer)
+    fit <- lm( as.formula(paste(input$type, "~ jahr")), beer_data)
     # predicts the price
-    pred <- predict(fit, newdata = data.frame(jahr=input$year))
+    new.df <- data.frame(jahr=input$year)
+    pred <- predict(fit, new.df)
     res <- paste(round(pred, digits = 1.5),"" )
     res
   })
