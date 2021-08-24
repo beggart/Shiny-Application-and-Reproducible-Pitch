@@ -16,7 +16,7 @@ shinyUI(fluidPage(
                   choices = list("Visitors"="besucher_gesamt","Beer Consumption" = "bier_konsum",  "Chicken Consumption" = "hendl_konsum", "Beer Price" = "bier_preis", "Chicken Price" = "hendl_preis"))
     ),
     
-    # Show a plot with diamonds and regression line
+    # Show a plot with Oktoberfest data and regression line
     mainPanel(
       plotOutput("distPlot"),
       h4("Prediction:"),
