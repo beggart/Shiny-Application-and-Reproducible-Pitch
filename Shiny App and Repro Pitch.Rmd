@@ -19,9 +19,9 @@ Using PageLeft and PageRight keys all the slides can be traversed.
 
 ## Application Overview
 
-- Relevant Data like beer price, chicken consumption or visitors can be chosen
+- Interesting Data about the Oktoberfest, like beer price, chicken consumption or visitors, can be chosen
 - A year can be selected to predict the future value based on a linear regression model
-- This Report explains the usage of the app
+- This Report explains the background around the app
 
 
 ## Slide with Complete Reporting Appliaction
