@@ -1,0 +1,13 @@
+name: Shiny-Application-and-Reproducible-Pitch
+title: Shiny-Application-and-Reproducible-Pitch
+username:
+account: oktoberfestpredictor
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4527547
+bundleId: 4956965
+url: https://oktoberfestpredictor.shinyapps.io/Shiny-Application-and-Reproducible-Pitch/
+when: 1629789001.08913
+lastSyncTime: 1629789001.08913
+asMultiple: FALSE
+asStatic: FALSE
